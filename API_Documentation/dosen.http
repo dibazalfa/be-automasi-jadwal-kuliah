@@ -1,0 +1,46 @@
+###
+GET http://localhost:3000/dosen
+Content-Type: application/json
+
+###
+GET http://localhost:3000/dosen/HC
+Content-Type: application/json
+
+###
+POST http://localhost:3000/dosen
+Content-Type: application/json
+
+{
+    "dosen_kode": "RR",
+    "dosen_nama": "Ridho Rahman Hariadi",
+    "dosen_level": 2,
+    "kesediaan": [
+        { "hari": "SENIN", "sesi": "SATU" },
+        { "hari": "SELASA", "sesi": "SATU" },
+        { "hari": "RABU", "sesi": "SATU" },
+        { "hari": "KAMIS", "sesi": "SATU" },
+        { "hari": "JUMAT", "sesi": "SATU" }
+    ]
+}
+
+###
+PATCH http://localhost:3000/dosen/HC
+Content-Type: application/json
+
+{
+    "dosen_kode" : "HC",
+    "dosen_nama" : "Henning Titi Ciptyaningtyas",
+    "dosen_level" : 3,
+    "kesediaan": [
+        { "hari": "SENIN", "sesi": "SATU" },
+        { "hari": "SENIN", "sesi": "DUA" },
+        { "hari": "SELASA", "sesi": "SATU" },
+        { "hari": "RABU", "sesi": "SATU" },
+        { "hari": "KAMIS", "sesi": "SATU" },
+        { "hari": "JUMAT", "sesi": "SATU" }
+    ]
+}
+
+###
+DELETE http://localhost:3000/dosen/RR
+Content-Type: application/json

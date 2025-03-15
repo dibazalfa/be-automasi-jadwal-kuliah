@@ -1,0 +1,31 @@
+###
+GET http://localhost:3000/jadwal_hindari
+Content-Type: application/json
+
+###
+GET http://localhost:3000/jadwal_hindari/:id
+Content-Type: application/json
+
+###
+POST http://localhost:3000/jadwal_hindari
+Content-Type: application/json
+
+{
+    "hindari_agenda" : "Pengayaan",
+    "hindari_hari" : "JUMAT",
+    "hindari_sesi" : "TIGA"
+}
+
+###
+PATCH http://localhost:3000/jadwal_hindari/:id
+Content-Type: application/json
+
+{
+    "hindari_agenda" : "Pengayaan",
+    "hindari_hari" : "JUMAT",
+    "hindari_sesi" : "DUA"
+}
+
+###
+DELETE http://localhost:3000/jadwal_hindari/:id
+Content-Type: application/json

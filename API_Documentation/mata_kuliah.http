@@ -1,0 +1,39 @@
+###
+GET http://localhost:3000/mata_kuliah
+Content-Type: application/json
+
+###
+GET http://localhost:3000/mata_kuliah/ET234602
+Content-Type: application/json
+
+###
+POST http://localhost:3000/mata_kuliah
+Content-Type: application/json
+
+{
+    "matkul_kode" : "ET234602",
+    "matkul_nama" : "Pengembangan Sistem dan Teknologi Informasi (Capstone Project)",
+    "matkul_sem" : 6,
+    "kelas": [
+        { "kelas_mk": "A" },
+        { "kelas_mk": "B" }
+    ]
+}
+
+###
+PATCH http://localhost:3000/mata_kuliah/ET234602
+Content-Type: application/json
+
+{
+    "matkul_kode" : "ET234602",
+    "matkul_nama" : "Pengembangan Sistem dan Teknologi Informasi (Capstone Project)",
+    "matkul_sem" : 6,
+    "kelas": [
+        { "kelas_mk": "A" },
+        { "kelas_mk": "B" }
+    ]
+}
+
+###
+DELETE http://localhost:3000/mata_kuliah/ET001
+Content-Type: application/json
