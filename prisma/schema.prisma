@@ -47,7 +47,13 @@ model mata_kuliah {
     matkul_kode       String              @id @db.VarChar(50)
     matkul_nama       String              @db.VarChar(255)
     matkul_sem        Int
+    matkul_tipe       TipeMK
     mata_kuliah_kelas mata_kuliah_kelas[]
+}
+
+enum TipeMK {
+    DEPARTEMEN
+    PENGAYAAN
 }
 
 model mata_kuliah_kelas {
@@ -63,6 +69,8 @@ model mata_kuliah_kelas {
 enum Kelas {
     A
     B
+    C
+    D
 }
 
 model mata_kuliah_kelas_dosen {

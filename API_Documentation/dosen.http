@@ -3,7 +3,7 @@ GET http://localhost:3000/dosen
 Content-Type: application/json
 
 ###
-GET http://localhost:3000/dosen/HC
+GET http://localhost:3000/dosen/:kode
 Content-Type: application/json
 
 ###
@@ -24,7 +24,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH http://localhost:3000/dosen/HC
+PATCH http://localhost:3000/dosen/:kode
 Content-Type: application/json
 
 {
@@ -42,5 +42,5 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/dosen/RR
+DELETE http://localhost:3000/dosen/:kode
 Content-Type: application/json
