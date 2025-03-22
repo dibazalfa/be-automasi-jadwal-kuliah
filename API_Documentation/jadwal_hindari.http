@@ -1,14 +1,19 @@
+@token = <ubah token>
+
 ###
 GET http://localhost:3000/jadwal_hindari
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 GET http://localhost:3000/jadwal_hindari/:id
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 POST http://localhost:3000/jadwal_hindari
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "hindari_agenda" : "SKPB",
@@ -20,6 +25,7 @@ Content-Type: application/json
 ###
 PATCH http://localhost:3000/jadwal_hindari/:id
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "hindari_agenda" : "Pengayaan",
@@ -31,3 +37,4 @@ Content-Type: application/json
 ###
 DELETE http://localhost:3000/jadwal_hindari/:id
 Content-Type: application/json
+Authorization: Bearer {{token}}

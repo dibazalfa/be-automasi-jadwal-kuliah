@@ -1,14 +1,19 @@
+@token = <ubah token>
+
 ###
 GET http://localhost:3000/ruangan
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 GET http://localhost:3000/ruangan/:kode
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 POST http://localhost:3000/ruangan
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "ruangan_kode" : "702",
@@ -18,6 +23,7 @@ Content-Type: application/json
 ###
 PATCH http://localhost:3000/ruangan/:kode
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "ruangan_kode" : "702",
@@ -27,3 +33,4 @@ Content-Type: application/json
 ###
 DELETE http://localhost:3000/ruangan/:kode
 Content-Type: application/json
+Authorization: Bearer {{token}}

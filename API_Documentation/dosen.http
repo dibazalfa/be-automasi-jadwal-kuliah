@@ -1,14 +1,19 @@
+@token = <ubah token>
+
 ###
 GET http://localhost:3000/dosen
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 GET http://localhost:3000/dosen/:kode
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 POST http://localhost:3000/dosen
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "dosen_kode": "RR",
@@ -26,6 +31,7 @@ Content-Type: application/json
 ###
 PATCH http://localhost:3000/dosen/:kode
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "dosen_kode" : "HC",
@@ -44,3 +50,4 @@ Content-Type: application/json
 ###
 DELETE http://localhost:3000/dosen/:kode
 Content-Type: application/json
+Authorization: Bearer {{token}}

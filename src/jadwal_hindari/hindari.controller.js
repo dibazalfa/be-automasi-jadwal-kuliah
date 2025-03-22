@@ -1,6 +1,7 @@
 // Layer untuk handle request dan response
 // Handle validasi body
 const express = require("express");
+const { auth } = require('../middleware/auth');
 const {
     getAllHindari,
     getHindariById,
@@ -11,7 +12,7 @@ const {
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
     try {
         const hindari = await getAllHindari();
         res.send(hindari);
@@ -20,7 +21,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
     try {
         const hindari = await getHindariById(req.params.id);
         res.send(hindari);
@@ -29,7 +30,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
     try {
         const newHindari = await createHindari(req.body);
         res.send({
@@ -41,7 +42,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
     try {
         await deleteHindariById(req.params.id);
         res.send({ message: "Data Jadwal Hindari berhasil dihapus" });
@@ -50,7 +51,7 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
     try {
         const updatedHindari = await editHindariById(req.params.id, req.body);
         res.send({
@@ -62,7 +63,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", auth, async (req, res) => {
     try {
         const updatedHindari = await editHindariById(req.params.id, req.body);
         res.send({

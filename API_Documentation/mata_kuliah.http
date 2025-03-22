@@ -1,14 +1,19 @@
+@token = <ubah token>
+
 ###
 GET http://localhost:3000/mata_kuliah
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 GET http://localhost:3000/mata_kuliah/:kode
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 POST http://localhost:3000/mata_kuliah
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "matkul_kode" : "ET234602",
@@ -24,6 +29,7 @@ Content-Type: application/json
 ###
 PATCH http://localhost:3000/mata_kuliah/:kode
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "matkul_kode" : "ET234602",
@@ -39,3 +45,4 @@ Content-Type: application/json
 ###
 DELETE http://localhost:3000/mata_kuliah/:kode
 Content-Type: application/json
+Authorization: Bearer {{token}}

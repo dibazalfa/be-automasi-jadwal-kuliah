@@ -1,4 +1,5 @@
 const express = require("express");
+const { auth } = require('../middleware/auth');
 const {
     getAllMkDosen,
     getMkDosenById,
@@ -9,7 +10,7 @@ const {
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
     try {
         const mkDosen = await getAllMkDosen();
         res.send(mkDosen);
@@ -18,7 +19,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
     try {
         const mkDosen = await getMkDosenById(req.params.id);
         res.send(mkDosen);
@@ -27,7 +28,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
     try {
         const newMkDosen = await createMkDosen(req.body);
         res.send({
@@ -39,7 +40,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
     try {
         await deleteMkDosenById(req.params.id);
         res.send({ message: "Data Mata Kuliah dan Dosen Pengampu berhasil dihapus" });
@@ -48,7 +49,7 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
     try {
         const updatedMkDosen = await editMkDosenById(req.params.id, req.body);
         res.send({

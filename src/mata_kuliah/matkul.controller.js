@@ -1,6 +1,7 @@
 // Layer untuk handle request dan response
 // Handle validasi body
 const express = require("express");
+const { auth } = require('../middleware/auth');
 const {
     getAllMatkul,
     getMatkulByKode,
@@ -11,7 +12,7 @@ const {
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
     try {
         const matkul = await getAllMatkul();
         res.send(matkul);
@@ -20,7 +21,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/:kode", async (req, res) => {
+router.get("/:kode", auth, async (req, res) => {
     try {
         const matkul = await getMatkulByKode(req.params.kode);
         res.send(matkul);
@@ -29,7 +30,7 @@ router.get("/:kode", async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
     try {
         const newMatkul = await createMatkul(req.body);
         res.send({
@@ -41,7 +42,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.delete("/:kode", async (req, res) => {
+router.delete("/:kode", auth, async (req, res) => {
     try {
         await deleteMatkulByKode(req.params.kode);
         res.send({ message: "Data Mata Kuliah berhasil dihapus" });
@@ -50,7 +51,7 @@ router.delete("/:kode", async (req, res) => {
     }
 });
 
-router.put("/:kode", async (req, res) => {
+router.put("/:kode", auth, async (req, res) => {
     try {
         const updatedMatkul = await editMatkulByKode(req.params.kode, req.body);
         res.send({
@@ -62,7 +63,7 @@ router.put("/:kode", async (req, res) => {
     }
 });
 
-router.patch("/:kode", async (req, res) => {
+router.patch("/:kode", auth, async (req, res) => {
     try {
         const updatedMatkul = await editMatkulByKode(req.params.kode, req.body);
         res.send({

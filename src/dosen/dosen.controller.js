@@ -1,6 +1,7 @@
 // Layer untuk handle request dan response
 // Handle validasi body
 const express = require("express");
+const { auth } = require('../middleware/auth');
 const {
     getAllDosen,
     getDosenByKode,
@@ -11,7 +12,7 @@ const {
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
     try {
         const dosen = await getAllDosen();
         res.send(dosen);
@@ -20,7 +21,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/:kode", async (req, res) => {
+router.get("/:kode", auth, async (req, res) => {
     try {
         const dosen = await getDosenByKode(req.params.kode);
         res.send(dosen);
@@ -29,7 +30,7 @@ router.get("/:kode", async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
     try {
         const newDosen = await createDosen(req.body);
         res.send({
@@ -41,7 +42,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.delete("/:kode", async (req, res) => {
+router.delete("/:kode", auth, async (req, res) => {
     try {
         await deleteDosenByKode(req.params.kode);
         res.send({ message: "Data dosen berhasil dihapus" });
@@ -50,7 +51,7 @@ router.delete("/:kode", async (req, res) => {
     }
 });
 
-router.put("/:kode", async (req, res) => {
+router.put("/:kode", auth, async (req, res) => {
     try {
         const updatedDosen = await editDosenByKode(req.params.kode, req.body);
         res.send({
@@ -62,7 +63,7 @@ router.put("/:kode", async (req, res) => {
     }
 });
 
-router.patch("/:kode", async (req, res) => {
+router.patch("/:kode", auth, async (req, res) => {
     try {
         const updatedDosen = await editDosenByKode(req.params.kode, req.body);
         res.send({
