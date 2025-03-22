@@ -86,6 +86,7 @@ model jadwal_hindari {
     hindari_agenda String @db.VarChar(255)
     hindari_hari   Hari
     hindari_sesi   Sesi
+    hindari_smt    Int[]
 }
 
 model ruangan {

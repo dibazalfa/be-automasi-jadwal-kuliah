@@ -11,9 +11,10 @@ POST http://localhost:3000/jadwal_hindari
 Content-Type: application/json
 
 {
-    "hindari_agenda" : "Pengayaan",
+    "hindari_agenda" : "SKPB",
     "hindari_hari" : "JUMAT",
-    "hindari_sesi" : "TIGA"
+    "hindari_sesi" : "TIGA",
+    "hindari_smt" : [1, 2, 3]
 }
 
 ###
@@ -23,7 +24,8 @@ Content-Type: application/json
 {
     "hindari_agenda" : "Pengayaan",
     "hindari_hari" : "JUMAT",
-    "hindari_sesi" : "DUA"
+    "hindari_sesi" : "DUA",
+    "hindari_smt" : [1, 2, 4]
 }
 
 ###

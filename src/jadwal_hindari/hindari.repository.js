@@ -20,6 +20,7 @@ const insertHindari = async (hindariData) => {
             hindari_agenda: hindariData.hindari_agenda,
             hindari_hari: hindariData.hindari_hari,
             hindari_sesi: hindariData.hindari_sesi,
+            hindari_smt: hindariData.hindari_smt,
         },
     });
 };
@@ -37,6 +38,7 @@ const editHindari = async (id_hindari, hindariData) => {
             hindari_agenda: hindariData.hindari_agenda,
             hindari_hari: hindariData.hindari_hari,
             hindari_sesi: hindariData.hindari_sesi,
+            hindari_smt: hindariData.hindari_smt,
         },
     });
 };

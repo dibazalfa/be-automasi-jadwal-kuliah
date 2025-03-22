@@ -20,8 +20,8 @@ PATCH http://localhost:3000/mk_dosen/:id
 Content-Type: application/json
 
 {
-    "id_mk_kelas" : "ET234602",
-    "dosen_kode" : "RR"
+    "nama_kelas" : "Pengembangan Sistem dan Teknologi Informasi (Capstone Project) A",
+    "dosen_kode" : "HC"
 }
 
 ###
