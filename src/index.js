@@ -1,7 +1,15 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: '*',
+    optionsSuccessStatus: 204
+}));
 
 dotenv.config();
 
