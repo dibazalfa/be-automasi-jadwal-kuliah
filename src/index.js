@@ -23,6 +23,7 @@ app.use('/mk_dosen', mkDosenController)
 app.use('/ruangan', ruanganController)
 app.use('/jadwal', jadwalController)
 
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

@@ -11,8 +11,8 @@ POST http://localhost:3000/mk_dosen
 Content-Type: application/json
 
 {
-    "nama_kelas" : "Pengembangan Sistem dan Teknologi Informasi (Capstone Project) A",
-    "dosen_kode" : "RR"
+    "nama_kelas" : "Struktur Data A",
+    "dosen_kode" : "AI"
 }
 
 ###

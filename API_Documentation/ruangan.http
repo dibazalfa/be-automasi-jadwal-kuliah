@@ -11,7 +11,7 @@ POST http://localhost:3000/ruangan
 Content-Type: application/json
 
 {
-    "ruangan_kode" : "702",
+    "ruangan_kode" : "704",
     "ruangan_kapasitas" : 48
 }
 

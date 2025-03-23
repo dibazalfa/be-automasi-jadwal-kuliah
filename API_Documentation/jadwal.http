@@ -1,0 +1,15 @@
+### Generate Jadwal Kuliah
+GET http://localhost:3000/jadwal
+Content-Type: application/json
+
+###
+POST http://localhost:3000/jadwal
+Content-Type: application/json
+
+###
+GET http://localhost:3000/jadwal/generate
+Content-Type: application/json
+
+###
+POST http://localhost:3000/jadwal/generate
+Content-Type: application/json

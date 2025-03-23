@@ -1,6 +1,6 @@
-
 const prisma = require('../db');
 
+// Ambil daftar dosen dan mata kuliah yang diampu
 const findJadwalDosenWithKelas = async () => {
     return await prisma.$queryRaw`
         SELECT 
@@ -8,6 +8,7 @@ const findJadwalDosenWithKelas = async () => {
             mkd.dosen_kode,
             d.dosen_nama,
             mkk.nama_kelas,
+            mkk.matkul_kode,
             jd.id_jadwal_dosen,
             jd.dosen_sedia_hari,
             jd.dosen_sedia_sesi
@@ -18,7 +19,12 @@ const findJadwalDosenWithKelas = async () => {
     `;
 };
 
-module.exports = {
-    findJadwalDosenWithKelas
+// Ambil jadwal yang harus dihindari (jadwal tidak boleh dipakai)
+const findJadwalHindari = async () => {
+    return await prisma.jadwal_hindari.findMany();
 };
 
+module.exports = {
+    findJadwalDosenWithKelas,
+    findJadwalHindari
+};
