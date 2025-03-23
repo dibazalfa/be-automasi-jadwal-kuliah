@@ -1,3 +1,4 @@
+
 const express = require("express");
 // const { auth } = require("../middleware/auth");
 const { getAllJadwalDosen, generateJadwal } = require("./jadwal.service");
@@ -26,5 +27,6 @@ router.post("/generate", async (req, res) => {
         res.status(500).send({ error: err.message });
     }
 });
+
 
 module.exports = router;

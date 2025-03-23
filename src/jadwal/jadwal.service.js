@@ -1,29 +1,28 @@
-const { findJadwalDosenWithKelas, findJadwalHindari } = require("./jadwal.repository");
 
-// Fungsi untuk mendapatkan semua jadwal dosen
+const { findJadwalDosenWithKelas, findJadwalHindari, insertGeneratedJadwal, deleteAllJadwal } = require("./jadwal.repository");
+
 const getAllJadwalDosen = async () => {
     return await findJadwalDosenWithKelas();
 };
 
-// Fungsi untuk generate jadwal otomatis dengan backtracking
 const generateJadwal = async () => {
+    await deleteAllJadwal();
+
     const dosenJadwal = await findJadwalDosenWithKelas();
     const jadwalHindari = await findJadwalHindari();
 
     let jadwalFinal = [];
-    let usedSlots = {}; // { "HARI_SESI": dosen_kode }
-    let assignedClasses = {}; // { "matkul_kode_nama_kelas": true }
+    let usedSlots = {};
+    let assignedClasses = {};
 
     const isValid = (jadwal) => {
         const { dosen_sedia_hari, dosen_sedia_sesi } = jadwal;
         const slotKey = `${dosen_sedia_hari}_${dosen_sedia_sesi}`;
 
-        // Cek apakah slot ini sudah digunakan oleh dosen lain
         if (usedSlots[slotKey]) return false;
 
-        // Cek apakah jadwal ini bertabrakan dengan jadwal yang harus dihindari
-        const isAvoided = jadwalHindari.some(jh => 
-            jh.hindari_hari === dosen_sedia_hari && 
+        const isAvoided = jadwalHindari.some(jh =>
+            jh.hindari_hari === dosen_sedia_hari &&
             jh.hindari_sesi === dosen_sedia_sesi
         );
         if (isAvoided) return false;
@@ -32,25 +31,33 @@ const generateJadwal = async () => {
     };
 
     dosenJadwal.forEach((jadwal) => {
-        const { dosen_kode, nama_kelas, matkul_kode, dosen_sedia_hari, dosen_sedia_sesi } = jadwal;
+        const {
+            id_mk_kelas_dosen,
+            dosen_kode,
+            nama_kelas,
+            matkul_kode,
+            id_mk_kelas,
+            dosen_sedia_hari,
+            dosen_sedia_sesi
+        } = jadwal;
+
         const slotKey = `${dosen_sedia_hari}_${dosen_sedia_sesi}`;
         const classKey = `${matkul_kode}_${nama_kelas}`;
 
         if (!assignedClasses[classKey] && isValid(jadwal)) {
-            // Masukkan ke jadwal final
             jadwalFinal.push({
-                dosen_kode,
-                nama_kelas,
-                matkul_kode,
-                hari: dosen_sedia_hari,
-                sesi: dosen_sedia_sesi
+                id_mk_kelas: id_mk_kelas,
+                ruangan_kode: "704",
+                jadwal_hari: dosen_sedia_hari,
+                jadwal_sesi: dosen_sedia_sesi
             });
 
-            // Tandai slot dan kelas sudah dipakai
             usedSlots[slotKey] = true;
             assignedClasses[classKey] = true;
         }
     });
+
+    await insertGeneratedJadwal(jadwalFinal);
 
     return jadwalFinal;
 };
