@@ -11,13 +11,13 @@ POST http://localhost:3000/dosen
 Content-Type: application/json
 
 {
-    "dosen_kode": "AI",
-    "dosen_nama": "Annissaa Indrawati",
+    "dosen_kode": "RR",
+    "dosen_nama": "Ridho Rahman Hariadi",
     "dosen_level": 2,
     "kesediaan": [
         { "hari": "SENIN", "sesi": "DUA" },
-        { "hari": "SELASA", "sesi": "SATU" },
-        { "hari": "RABU", "sesi": "DUA" }      
+        { "hari": "SELASA", "sesi": "DUA" },
+        { "hari": "JUMAT", "sesi": "TIGA" }      
     ]
 }
 

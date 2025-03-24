@@ -1,14 +1,12 @@
-
 const prisma = require('../db');
 
 const findJadwalDosenWithKelas = async () => {
-    return await prisma.$queryRaw
-        `
+    return await prisma.$queryRaw`
         SELECT 
             mkd.id_mk_kelas_dosen,
             mkd.dosen_kode,
             d.dosen_nama,
-            mkk.id_mk_kelas, -- ← tambahkan ini!
+            mkk.id_mk_kelas,
             mkk.nama_kelas,
             mkk.matkul_kode,
             jd.id_jadwal_dosen,
@@ -21,15 +19,39 @@ const findJadwalDosenWithKelas = async () => {
     `;
 };
 
-
 const findJadwalHindari = async () => {
     return await prisma.jadwal_hindari.findMany();
 };
 
 const insertGeneratedJadwal = async (jadwalData) => {
-    return await prisma.jadwal.createMany({
-        data: jadwalData,
+    const validJadwalData = jadwalData.map(j => ({
+        id_mk_kelas: j.id_mk_kelas,
+        dosen_kode: j.dosen_kode,
+        nama_kelas: j.nama_kelas,
+        matkul_kode: j.matkul_kode,
+        ruangan_kode: j.ruangan_kode,
+        jadwal_hari: j.jadwal_hari,
+        jadwal_sesi: j.jadwal_sesi
+    }));
+
+    await prisma.jadwal.createMany({
+        data: validJadwalData,
         skipDuplicates: true
+    });
+
+    // ngeretrieve id_jadwal
+    return await prisma.jadwal.findMany({
+        where: {
+            OR: validJadwalData.map(j => ({
+                id_mk_kelas: j.id_mk_kelas,
+                dosen_kode: j.dosen_kode,
+                nama_kelas: j.nama_kelas,
+                matkul_kode: j.matkul_kode,
+                ruangan_kode: j.ruangan_kode,
+                jadwal_hari: j.jadwal_hari,
+                jadwal_sesi: j.jadwal_sesi
+            }))
+        }
     });
 };
 

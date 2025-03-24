@@ -11,9 +11,9 @@ POST http://localhost:3000/mata_kuliah
 Content-Type: application/json
 
 {
-    "matkul_kode" : "ET123456",
-    "matkul_nama" : "Struktur Data",
-    "matkul_sem" : 4,
+    "matkul_kode" : "ET234567",
+    "matkul_nama" : "Capstone",
+    "matkul_sem" : 6,
     "matkul_tipe" : "DEPARTEMEN",
     "kelas": [
         { "kelas_mk": "A" },

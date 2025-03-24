@@ -98,6 +98,9 @@ model ruangan {
 model jadwal {
     id_jadwal    String @id @default(uuid())
     id_mk_kelas  String
+    dosen_kode   String @db.VarChar(50)
+    nama_kelas   String @db.VarChar(255)
+    matkul_kode  String @db.VarChar(50)
     ruangan_kode String
     jadwal_hari  Hari
     jadwal_sesi  Sesi
