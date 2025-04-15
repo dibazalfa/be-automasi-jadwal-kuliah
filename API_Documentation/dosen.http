@@ -16,9 +16,9 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "dosen_kode": "RR",
-    "dosen_nama": "Ridho Rahman Hariadi",
-    "dosen_level": 2,
+    "dosen_kode": "HC",
+    "dosen_nama": "Henning Ciptyaningtyas",
+    "dosen_prioritas": "PRIORITAS",
     "kesediaan": [
         { "hari": "SENIN", "sesi": "SATU" },
         { "hari": "SELASA", "sesi": "SATU" },

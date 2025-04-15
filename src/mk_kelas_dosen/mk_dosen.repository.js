@@ -31,7 +31,8 @@ const insertMkDosen = async (mkDosenData) => {
     return await prisma.mata_kuliah_kelas_dosen.create({
         data: {
             id_mk_kelas: mkKelas.id_mk_kelas,
-            dosen_kode: mkDosenData.dosen_kode
+            dosen_kode: mkDosenData.dosen_kode,
+            mk_kelas_sem: mkDosenData.mk_kelas_sem
         },
         include: {
             mata_kuliah_kelas: true,
@@ -51,7 +52,8 @@ const editMkDosen = async (id_mk_kelas_dosen, mkDosenData) => {
         where: { id_mk_kelas_dosen },
         data: {
             id_mk_kelas: mkDosenData.id_mk_kelas,
-            dosen_kode: mkDosenData.dosen_kode
+            dosen_kode: mkDosenData.dosen_kode,
+            mk_kelas_sem: mkDosenData.mk_kelas_sem
         },
         include: {
             mata_kuliah_kelas: true,

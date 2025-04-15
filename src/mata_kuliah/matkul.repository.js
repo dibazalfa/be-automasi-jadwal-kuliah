@@ -22,7 +22,6 @@ const insertMatkul = async (matkulData) => {
         data: {
             matkul_kode: matkulData.matkul_kode,
             matkul_nama: matkulData.matkul_nama,
-            matkul_sem: matkulData.matkul_sem,
             matkul_tipe: matkulData.matkul_tipe,
             mata_kuliah_kelas: {
                 create: matkulData.kelas.map(item => ({
@@ -50,7 +49,6 @@ const editMatkul = async (matkul_kode, matkulData) => {
         where: { matkul_kode },
         data: {
             matkul_nama: matkulData.matkul_nama,
-            matkul_sem: matkulData.matkul_sem,
             matkul_tipe: matkulData.matkul_tipe,
             mata_kuliah_kelas: {
                 create: matkulData.kelas.map(item => ({

@@ -22,7 +22,7 @@ const insertDosen = async (dosenData) => {
         data: {
             dosen_kode: dosenData.dosen_kode,
             dosen_nama: dosenData.dosen_nama,
-            dosen_level: dosenData.dosen_level,
+            dosen_prioritas: dosenData.dosen_prioritas,
             jadwal_dosen: {
                 create: dosenData.kesediaan.map(item => ({
                     dosen_sedia_hari: item.hari,
@@ -49,7 +49,7 @@ const editDosen = async (dosen_kode, dosenData) => {
         where: { dosen_kode },
         data: {
             dosen_nama: dosenData.dosen_nama,
-            dosen_level: dosenData.dosen_level,
+            dosen_prioritas: dosenData.dosen_prioritas,
             jadwal_dosen: {
                 create: dosenData.kesediaan.map(item => ({
                     dosen_sedia_hari: item.hari,
