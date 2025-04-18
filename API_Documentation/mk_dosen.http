@@ -11,8 +11,8 @@ POST http://localhost:3000/mk_dosen
 Content-Type: application/json
 
 {
-    "nama_kelas" : "Capstone A",
-    "dosen_kode" : "RR"
+    "nama_kelas" : "IMK B",
+    "dosen_kode" : "RZ"
 }
 
 ###
