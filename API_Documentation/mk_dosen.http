@@ -17,18 +17,20 @@ Authorization: Bearer {{token}}
 
 {
     "nama_kelas" : "Pengembangan Sistem dan Teknologi Informasi (Capstone Project) A",
-    "dosen_kode" : "RR",
+    "dosen_kode" : "HC",
+    "matkul_tipe" : "DEPARTEMEN",
     "mk_kelas_sem" : [1, 2, 3]
 }
 
 ###
-PATCH http://localhost:3000/mk_dosen/:id
+PUT http://localhost:3000/mk_dosen/:id
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
     "nama_kelas" : "Pengembangan Sistem dan Teknologi Informasi (Capstone Project) A",
     "dosen_kode" : "HC",
+    "matkul_tipe" : "PENGAYAAN",
     "mk_kelas_sem" : [1, 2, 3]
 }
 

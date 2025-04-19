@@ -32,7 +32,8 @@ const insertMkDosen = async (mkDosenData) => {
         data: {
             id_mk_kelas: mkKelas.id_mk_kelas,
             dosen_kode: mkDosenData.dosen_kode,
-            mk_kelas_sem: mkDosenData.mk_kelas_sem
+            mk_kelas_sem: mkDosenData.mk_kelas_sem,
+            matkul_tipe: mkDosenData.matkul_tipe,
         },
         include: {
             mata_kuliah_kelas: true,
@@ -53,7 +54,8 @@ const editMkDosen = async (id_mk_kelas_dosen, mkDosenData) => {
         data: {
             id_mk_kelas: mkDosenData.id_mk_kelas,
             dosen_kode: mkDosenData.dosen_kode,
-            mk_kelas_sem: mkDosenData.mk_kelas_sem
+            mk_kelas_sem: mkDosenData.mk_kelas_sem,
+            matkul_tipe: mkDosenData.matkul_tipe
         },
         include: {
             mata_kuliah_kelas: true,

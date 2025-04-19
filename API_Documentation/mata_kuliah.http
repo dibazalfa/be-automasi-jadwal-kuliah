@@ -18,7 +18,6 @@ Authorization: Bearer {{token}}
 {
     "matkul_kode" : "ET234602",
     "matkul_nama" : "Pengembangan Sistem dan Teknologi Informasi (Capstone Project)",
-    "matkul_tipe" : "DEPARTEMEN",
     "kelas": [
         { "kelas_mk": "A" },
         { "kelas_mk": "B" }
@@ -33,7 +32,6 @@ Authorization: Bearer {{token}}
 {
     "matkul_kode" : "ET234602",
     "matkul_nama" : "Pengembangan Sistem dan Teknologi Informasi (Capstone Project)",
-    "matkul_tipe" : "PENGAYAAN",
     "kelas": [
         { "kelas_mk": "A" },
         { "kelas_mk": "B" }

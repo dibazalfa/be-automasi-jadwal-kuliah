@@ -36,7 +36,7 @@ Authorization: Bearer {{token}}
 {
     "dosen_kode" : "HC",
     "dosen_nama" : "Henning Titi Ciptyaningtyas",
-    "dosen_level" : 3,
+    "dosen_prioritas" : "NON_PRIORITAS",
     "kesediaan": [
         { "hari": "SENIN", "sesi": "SATU" },
         { "hari": "SENIN", "sesi": "DUA" },

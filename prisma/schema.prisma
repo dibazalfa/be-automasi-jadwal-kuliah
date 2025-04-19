@@ -51,13 +51,7 @@ enum Sesi {
 model mata_kuliah {
     matkul_kode       String              @id @db.VarChar(50)
     matkul_nama       String              @db.VarChar(255)
-    matkul_tipe       TipeMK              @default(DEPARTEMEN)
     mata_kuliah_kelas mata_kuliah_kelas[]
-}
-
-enum TipeMK {
-    DEPARTEMEN
-    PENGAYAAN
 }
 
 model mata_kuliah_kelas {
@@ -82,8 +76,14 @@ model mata_kuliah_kelas_dosen {
     id_mk_kelas       String
     dosen_kode        String            @db.VarChar(50)
     mk_kelas_sem      Int[]
+    matkul_tipe       TipeMK            @default(DEPARTEMEN)
     mata_kuliah_kelas mata_kuliah_kelas @relation(fields: [id_mk_kelas], references: [id_mk_kelas], onDelete: Cascade)
     dosen             dosen             @relation(fields: [dosen_kode], references: [dosen_kode], onDelete: Cascade)
+}
+
+enum TipeMK {
+    DEPARTEMEN
+    PENGAYAAN
 }
 
 model jadwal_hindari {
