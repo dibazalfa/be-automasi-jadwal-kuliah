@@ -16,15 +16,20 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "dosen_kode": "HC",
-    "dosen_nama": "Henning Ciptyaningtyas",
+    "dosen_kode": "RW",
+    "dosen_nama": "Dr. Rizka Wakhidatus Sholikah, S. Kom",
     "dosen_prioritas": "PRIORITAS",
     "kesediaan": [
         { "hari": "SENIN", "sesi": "SATU" },
+        { "hari": "SENIN", "sesi": "TIGA" },
         { "hari": "SELASA", "sesi": "SATU" },
+        { "hari": "SELASA", "sesi": "TIGA" },
         { "hari": "RABU", "sesi": "SATU" },
+        { "hari": "RABU", "sesi": "TIGA" },
         { "hari": "KAMIS", "sesi": "SATU" },
-        { "hari": "JUMAT", "sesi": "SATU" }
+        { "hari": "KAMIS", "sesi": "TIGA" },
+        { "hari": "JUMAT", "sesi": "SATU" },
+        { "hari": "JUMAT", "sesi": "TIGA" }
     ]
 }
 

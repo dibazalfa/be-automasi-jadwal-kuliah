@@ -1,4 +1,4 @@
-@token = <ubah token>
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwiaWF0IjoxNzQ1MDQyMTYwLCJleHAiOjE3NDUwNjM3NjB9.mfr9UfNQhwfVR0h2UJquRv-rIa5hjvakYM-JZVcNAyk
 
 ###
 GET http://localhost:3000/ruangan
@@ -16,7 +16,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "ruangan_kode" : "702",
+    "ruangan_kode" : "705",
     "ruangan_kapasitas" : 48
 }
 

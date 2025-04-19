@@ -16,10 +16,10 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "nama_kelas" : "Pengembangan Sistem dan Teknologi Informasi (Capstone Project) A",
-    "dosen_kode" : "HC",
+    "nama_kelas" : "Big Data dan Data Lakehouse B",
+    "dosen_kode" : "FD",
     "matkul_tipe" : "DEPARTEMEN",
-    "mk_kelas_sem" : [1, 2, 3]
+    "mk_kelas_sem" : [4]
 }
 
 ###

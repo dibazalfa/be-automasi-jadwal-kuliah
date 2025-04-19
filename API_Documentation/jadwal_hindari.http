@@ -16,10 +16,10 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "hindari_agenda" : "SKPB",
-    "hindari_hari" : "JUMAT",
-    "hindari_sesi" : "TIGA",
-    "hindari_smt" : [1, 2, 3]
+    "hindari_agenda" : "KALKULUS 2",
+    "hindari_hari" : "SELASA",
+    "hindari_sesi" : "DUA",
+    "hindari_smt" : [4]
 }
 
 ###
