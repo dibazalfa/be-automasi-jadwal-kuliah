@@ -27,5 +27,25 @@ router.post("/generate", auth, async (req, res) => {
     }
 });
 
+// POST /jadwal/simpan
+router.post("/simpan", auth, async (req, res) => {
+    try {
+        const jadwalData = req.body.jadwal;
+        if (!Array.isArray(jadwalData)) {
+            return res.status(400).send({ error: "Invalid jadwal data format" });
+        }
+
+        const savedJadwal = await insertGeneratedJadwal(jadwalData);
+
+        res.send({
+            message: "Jadwal berhasil disimpan!",
+            data: savedJadwal
+        });
+    } catch (err) {
+        console.error('Error menyimpan jadwal:', err);
+        res.status(500).send({ error: err.message });
+    }
+});
+
 
 module.exports = router;
