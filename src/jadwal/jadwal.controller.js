@@ -86,4 +86,66 @@ router.get('/semester/:semester', auth, async (req, res) => {
     }
 });
 
+router.post('/simpan', auth, async (req, res) => {
+    try {
+        const { jadwal } = req.body;
+        
+        if (!Array.isArray(jadwal) || jadwal.length === 0) {
+            return res.status(400).json({ error: 'Data jadwal tidak valid' });
+        }
+
+        // Process each schedule entry
+        const savedSchedules = [];
+        for (const entry of jadwal) {
+            try {
+                const scheduleData = {
+                    id_mk_kelas: entry.id_mk_kelas,
+                    ruangan_kode: entry.ruangan_kode,
+                    jadwal_hari: entry.jadwal_hari,
+                    jadwal_sesi: entry.jadwal_sesi,
+                    jadwal_smt: entry.jadwal_smt || [1, 2] // Default to [1,2] if not specified
+                };
+
+                const savedSchedule = await jadwalService.create(scheduleData);
+                savedSchedules.push(savedSchedule);
+            } catch (error) {
+                console.error(`Error saving schedule for ${entry.nama_kelas}:`, error);
+                // Continue with next entry even if one fails
+            }
+        }
+
+        res.status(201).json({
+            message: `Berhasil menyimpan ${savedSchedules.length} dari ${jadwal.length} jadwal`,
+            data: savedSchedules
+        });
+
+    } catch (error) {
+        console.error('Error saving schedules:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Helper untuk mempersiapkan data sebelum disimpan
+const prepareJadwalForSaving = () => {
+  return jadwalGenerated.value.map(item => {
+    // Find the matching course from matchingList
+    const matchingCourse = matchingList.value.find(match => 
+      match.kelas.nama_kelas === item.kelas
+    );
+
+    if (!matchingCourse) {
+      console.warn(`No matching course found for ${item.kelas}`);
+      return null;
+    }
+
+    return {
+      id_mk_kelas: matchingCourse.kelas.id_mk_kelas,
+      ruangan_kode: item.ruangan,
+      jadwal_hari: item.hari,
+      jadwal_sesi: item.sesi,
+      jadwal_smt: matchingCourse.kelas.mk_kelas_sem || [1, 2]
+    };
+  }).filter(item => item !== null); // Remove any null entries
+};
+
 module.exports = router; 
