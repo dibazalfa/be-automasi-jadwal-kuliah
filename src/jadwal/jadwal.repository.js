@@ -83,4 +83,4 @@ class JadwalRepository {
     }
 }
 
-module.exports = new JadwalRepository(); 
+module.exports = new JadwalRepository();

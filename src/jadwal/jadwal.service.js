@@ -58,4 +58,4 @@ class JadwalService {
     }
 }
 
-module.exports = new JadwalService(); 
+module.exports = new JadwalService();
