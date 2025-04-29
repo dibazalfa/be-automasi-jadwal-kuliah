@@ -106,6 +106,7 @@ model jadwal {
     ruangan_kode String
     jadwal_hari  Hari
     jadwal_sesi  Sesi
+    jadwal_smt   Int[]
 
     mata_kuliah_kelas mata_kuliah_kelas @relation(fields: [id_mk_kelas], references: [id_mk_kelas], onDelete: Cascade)
     ruangan           ruangan           @relation(fields: [ruangan_kode], references: [ruangan_kode], onDelete: Cascade)
