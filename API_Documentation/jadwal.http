@@ -1,0 +1,49 @@
+### Get All Jadwal
+GET http://localhost:3000/jadwal
+Authorization: Bearer {{token}}
+
+### Get Jadwal by ID
+GET http://localhost:3000/jadwal/{{id_jadwal}}
+Authorization: Bearer {{token}}
+
+### Create New Jadwal
+POST http://localhost:3000/jadwal
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "id_mk_kelas": "string",
+    "ruangan_kode": "string",
+    "jadwal_hari": "SENIN",
+    "jadwal_sesi": "SESI_1",
+    "jadwal_smt": [1, 2]
+}
+
+### Update Jadwal
+PUT http://localhost:3000/jadwal/{{id_jadwal}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "id_mk_kelas": "string",
+    "ruangan_kode": "string",
+    "jadwal_hari": "SENIN",
+    "jadwal_sesi": "SESI_1",
+    "jadwal_smt": [1, 2]
+}
+
+### Delete Jadwal
+DELETE http://localhost:3000/jadwal/{{id_jadwal}}
+Authorization: Bearer {{token}}
+
+### Get Jadwal by Mata Kuliah Kelas
+GET http://localhost:3000/jadwal/mk-kelas/{{id_mk_kelas}}
+Authorization: Bearer {{token}}
+
+### Get Jadwal by Ruangan
+GET http://localhost:3000/jadwal/ruangan/{{ruangan_kode}}
+Authorization: Bearer {{token}}
+
+### Get Jadwal by Semester
+GET http://localhost:3000/jadwal/semester/{{semester}}
+Authorization: Bearer {{token}} 
