@@ -8,9 +8,11 @@ datasource db {
 }
 
 model user {
-    id_user  String @id @default(uuid())
-    username String @db.VarChar(255)
-    password String @db.VarChar(255)
+    id_user   String    @id @default(uuid())
+    username  String    @db.VarChar(255)
+    password  String    @db.VarChar(255)
+    createdAt DateTime  @default(now())
+    updatedAt DateTime? @updatedAt
 }
 
 model dosen {
@@ -19,6 +21,8 @@ model dosen {
     dosen_prioritas         Prioritas                 @default(NON_PRIORITAS)
     jadwal_dosen            jadwal_dosen[]
     mata_kuliah_kelas_dosen mata_kuliah_kelas_dosen[]
+    createdAt               DateTime                  @default(now())
+    updatedAt               DateTime?                 @updatedAt
 }
 
 enum Prioritas {
@@ -27,11 +31,13 @@ enum Prioritas {
 }
 
 model jadwal_dosen {
-    id_jadwal_dosen  String @id @default(uuid())
-    dosen_kode       String @db.VarChar(50)
+    id_jadwal_dosen  String    @id @default(uuid())
+    dosen_kode       String    @db.VarChar(50)
     dosen_sedia_hari Hari
     dosen_sedia_sesi Sesi
-    dosen            dosen  @relation(fields: [dosen_kode], references: [dosen_kode], onDelete: Cascade)
+    dosen            dosen     @relation(fields: [dosen_kode], references: [dosen_kode], onDelete: Cascade)
+    createdAt        DateTime  @default(now())
+    updatedAt        DateTime? @updatedAt
 }
 
 enum Hari {
@@ -52,6 +58,8 @@ model mata_kuliah {
     matkul_kode       String              @id @db.VarChar(50)
     matkul_nama       String              @db.VarChar(255)
     mata_kuliah_kelas mata_kuliah_kelas[]
+    createdAt         DateTime            @default(now())
+    updatedAt         DateTime?           @updatedAt
 }
 
 model mata_kuliah_kelas {
@@ -62,6 +70,8 @@ model mata_kuliah_kelas {
     mata_kuliah             mata_kuliah               @relation(fields: [matkul_kode], references: [matkul_kode], onDelete: Cascade)
     mata_kuliah_kelas_dosen mata_kuliah_kelas_dosen[]
     jadwal                  jadwal[]
+    createdAt               DateTime                  @default(now())
+    updatedAt               DateTime?                 @updatedAt
 }
 
 enum Kelas {
@@ -79,6 +89,8 @@ model mata_kuliah_kelas_dosen {
     matkul_tipe       TipeMK            @default(DEPARTEMEN)
     mata_kuliah_kelas mata_kuliah_kelas @relation(fields: [id_mk_kelas], references: [id_mk_kelas], onDelete: Cascade)
     dosen             dosen             @relation(fields: [dosen_kode], references: [dosen_kode], onDelete: Cascade)
+    createdAt         DateTime          @default(now())
+    updatedAt         DateTime?         @updatedAt
 }
 
 enum TipeMK {
@@ -87,17 +99,21 @@ enum TipeMK {
 }
 
 model jadwal_hindari {
-    id_hindari     String @id @default(uuid())
-    hindari_agenda String @db.VarChar(255)
+    id_hindari     String    @id @default(uuid())
+    hindari_agenda String    @db.VarChar(255)
     hindari_hari   Hari
     hindari_sesi   Sesi
     hindari_smt    Int[]
+    createdAt      DateTime  @default(now())
+    updatedAt      DateTime? @updatedAt
 }
 
 model ruangan {
-    ruangan_kode      String   @id @default(uuid())
+    ruangan_kode      String    @id @default(uuid())
     ruangan_kapasitas Int
     jadwal            jadwal[]
+    createdAt         DateTime  @default(now())
+    updatedAt         DateTime? @updatedAt
 }
 
 model jadwal {
@@ -106,8 +122,9 @@ model jadwal {
     ruangan_kode String
     jadwal_hari  Hari
     jadwal_sesi  Sesi
-    jadwal_smt   Int[]
 
     mata_kuliah_kelas mata_kuliah_kelas @relation(fields: [id_mk_kelas], references: [id_mk_kelas], onDelete: Cascade)
     ruangan           ruangan           @relation(fields: [ruangan_kode], references: [ruangan_kode], onDelete: Cascade)
+    createdAt         DateTime          @default(now())
+    updatedAt         DateTime?         @updatedAt
 }

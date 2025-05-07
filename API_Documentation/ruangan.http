@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwiaWF0IjoxNzQ1MDQyMTYwLCJleHAiOjE3NDUwNjM3NjB9.mfr9UfNQhwfVR0h2UJquRv-rIa5hjvakYM-JZVcNAyk
+@token = <ubah token>
 
 ###
 GET http://localhost:3000/ruangan
@@ -21,13 +21,13 @@ Authorization: Bearer {{token}}
 }
 
 ###
-PATCH http://localhost:3000/ruangan/:kode
+PATCH http://localhost:3000/ruangan/:702
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
     "ruangan_kode" : "702",
-    "ruangan_kapasitas" : 48
+    "ruangan_kapasitas" : 50
 }
 
 ###
