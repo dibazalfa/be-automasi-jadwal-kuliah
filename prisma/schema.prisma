@@ -18,16 +18,11 @@ model user {
 model dosen {
     dosen_kode              String                    @id @db.VarChar(50)
     dosen_nama              String                    @db.VarChar(255)
-    dosen_prioritas         Prioritas                 @default(NON_PRIORITAS)
+    dosen_prioritas         Int
     jadwal_dosen            jadwal_dosen[]
     mata_kuliah_kelas_dosen mata_kuliah_kelas_dosen[]
     createdAt               DateTime                  @default(now())
     updatedAt               DateTime?                 @updatedAt
-}
-
-enum Prioritas {
-    PRIORITAS
-    NON_PRIORITAS
 }
 
 model jadwal_dosen {
