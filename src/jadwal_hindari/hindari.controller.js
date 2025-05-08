@@ -1,7 +1,6 @@
-// Layer untuk handle request dan response
-// Handle validasi body
 const express = require("express");
 const { auth } = require('../middleware/auth');
+const roleAuth = require('../middleware/role');
 const {
     getAllHindari,
     getHindariById,
@@ -12,27 +11,27 @@ const {
 
 const router = express.Router();
 
-router.get("/", auth, async (req, res) => {
+router.get("/", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        const hindari = await getAllHindari();
+        const hindari = await getAllHindari(req.user.id);
         res.send(hindari);
     } catch (err) {
         res.status(500).send({ error: err.message });
     }
 });
 
-router.get("/:id", auth, async (req, res) => {
+router.get("/:id", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        const hindari = await getHindariById(req.params.id);
+        const hindari = await getHindariById(req.params.id, req.user.id);
         res.send(hindari);
     } catch (err) {
         res.status(404).send({ error: err.message });
     }
 });
 
-router.post("/", auth, async (req, res) => {
+router.post("/", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        const newHindari = await createHindari(req.body);
+        const newHindari = await createHindari(req.body, req.user.id);
         res.send({
             data: newHindari,
             message: "Data Jadwal Hindari berhasil ditambahkan",
@@ -42,18 +41,18 @@ router.post("/", auth, async (req, res) => {
     }
 });
 
-router.delete("/:id", auth, async (req, res) => {
+router.delete("/:id", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        await deleteHindariById(req.params.id);
+        await deleteHindariById(req.params.id, req.user.id);
         res.send({ message: "Data Jadwal Hindari berhasil dihapus" });
     } catch (err) {
         res.status(400).send({ error: err.message });
     }
 });
 
-router.put("/:id", auth, async (req, res) => {
+router.put("/:id", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        const updatedHindari = await editHindariById(req.params.id, req.body);
+        const updatedHindari = await editHindariById(req.params.id, req.body, req.user.id);
         res.send({
             data: updatedHindari,
             message: "Data Jadwal Hindari berhasil diubah",
@@ -63,9 +62,9 @@ router.put("/:id", auth, async (req, res) => {
     }
 });
 
-router.patch("/:id", auth, async (req, res) => {
+router.patch("/:id", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        const updatedHindari = await editHindariById(req.params.id, req.body);
+        const updatedHindari = await editHindariById(req.params.id, req.body, req.user.id);
         res.send({
             data: updatedHindari,
             message: "Data Jadwal Hindari berhasil diubah",

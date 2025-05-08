@@ -18,6 +18,7 @@ const PORT = process.env.PORT;
 app.use(express.json());
 
 const authController = require('./auth/auth.controller');
+const userController = require('./user/user.controller');
 const dosenController = require('./dosen/dosen.controller');
 const matkulController = require('./mata_kuliah/matkul.controller');
 const hindariController = require('./jadwal_hindari/hindari.controller');
@@ -26,6 +27,7 @@ const ruanganController = require('./ruangan/ruangan.controller');
 const jadwalController = require('./jadwal/jadwal.controller');
 
 app.use('/auth', authController)
+app.use('/user', userController)
 app.use('/dosen', dosenController)
 app.use('/mata_kuliah', matkulController)
 app.use('/jadwal_hindari', hindariController)

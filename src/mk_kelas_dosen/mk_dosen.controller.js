@@ -1,5 +1,7 @@
 const express = require("express");
 const { auth } = require('../middleware/auth');
+const roleAuth = require('../middleware/role');
+
 const {
     getAllMkDosen,
     getMkDosenById,
@@ -10,27 +12,27 @@ const {
 
 const router = express.Router();
 
-router.get("/", auth, async (req, res) => {
+router.get("/", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        const mkDosen = await getAllMkDosen();
+        const mkDosen = await getAllMkDosen(req.user.id);
         res.send(mkDosen);
     } catch (err) {
         res.status(500).send({ error: err.message });
     }
 });
 
-router.get("/:id", auth, async (req, res) => {
+router.get("/:id", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        const mkDosen = await getMkDosenById(req.params.id);
+        const mkDosen = await getMkDosenById(req.params.id, req.user.id);
         res.send(mkDosen);
     } catch (err) {
         res.status(404).send({ error: err.message });
     }
 });
 
-router.post("/", auth, async (req, res) => {
+router.post("/", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        const newMkDosen = await createMkDosen(req.body);
+        const newMkDosen = await createMkDosen(req.body, req.user.id);
         res.send({
             data: newMkDosen,
             message: "Data Mata Kuliah dan Dosen Pengampu berhasil ditambahkan",
@@ -40,18 +42,18 @@ router.post("/", auth, async (req, res) => {
     }
 });
 
-router.delete("/:id", auth, async (req, res) => {
+router.delete("/:id", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        await deleteMkDosenById(req.params.id);
+        await deleteMkDosenById(req.params.id, req.user.id);
         res.send({ message: "Data Mata Kuliah dan Dosen Pengampu berhasil dihapus" });
     } catch (err) {
         res.status(400).send({ error: err.message });
     }
 });
 
-router.put("/:id", auth, async (req, res) => {
+router.put("/:id", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        const updatedMkDosen = await editMkDosenById(req.params.id, req.body);
+        const updatedMkDosen = await editMkDosenById(req.params.id, req.body, req.user.id);
         res.send({
             data: updatedMkDosen,
             message: "Data Mata Kuliah dan Dosen Pengampu berhasil diubah",

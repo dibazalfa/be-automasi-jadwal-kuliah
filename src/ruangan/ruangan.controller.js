@@ -1,7 +1,7 @@
-// Layer untuk handle request dan response
-// Handle valkodeasi body
 const express = require("express");
 const { auth } = require('../middleware/auth');
+const roleAuth = require('../middleware/role');
+
 const {
     getAllRuangan,
     getRuanganByKode,
@@ -12,27 +12,27 @@ const {
 
 const router = express.Router();
 
-router.get("/", auth, async (req, res) => {
+router.get("/", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        const ruangan = await getAllRuangan();
+        const ruangan = await getAllRuangan(req.user.id);
         res.send(ruangan);
     } catch (err) {
         res.status(500).send({ error: err.message });
     }
 });
 
-router.get("/:kode", auth, async (req, res) => {
+router.get("/:kode", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        const ruangan = await getRuanganByKode(req.params.kode);
+        const ruangan = await getRuanganByKode(req.params.kode, req.user.id);
         res.send(ruangan);
     } catch (err) {
         res.status(404).send({ error: err.message });
     }
 });
 
-router.post("/", auth, async (req, res) => {
+router.post("/", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        const newRuangan = await createRuangan(req.body);
+        const newRuangan = await createRuangan(req.body, req.user.id);
         res.send({
             data: newRuangan,
             message: "Data Ruangan berhasil ditambahkan",
@@ -42,18 +42,18 @@ router.post("/", auth, async (req, res) => {
     }
 });
 
-router.delete("/:kode", auth, async (req, res) => {
+router.delete("/:kode", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        await deleteRuanganByKode(req.params.kode);
+        await deleteRuanganByKode(req.params.kode, req.user.id);
         res.send({ message: "Data Ruangan berhasil dihapus" });
     } catch (err) {
         res.status(400).send({ error: err.message });
     }
 });
 
-router.put("/:kode", auth, async (req, res) => {
+router.put("/:kode", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        const updatedRuangan = await editRuanganByKode(req.params.kode, req.body);
+        const updatedRuangan = await editRuanganByKode(req.params.kode, req.body, req.user.id);
         res.send({
             data: updatedRuangan,
             message: "Data Ruangan berhasil diubah",
@@ -63,9 +63,9 @@ router.put("/:kode", auth, async (req, res) => {
     }
 });
 
-router.patch("/:kode", auth, async (req, res) => {
+router.patch("/:kode", auth, roleAuth(['ADMINISTRATOR', 'OPERATOR']), async (req, res) => {
     try {
-        const updatedRuangan = await editRuanganByKode(req.params.kode, req.body);
+        const updatedRuangan = await editRuanganByKode(req.params.kode, req.body, req.user.id);
         res.send({
             data: updatedRuangan,
             message: "Data Ruangan berhasil diubah",

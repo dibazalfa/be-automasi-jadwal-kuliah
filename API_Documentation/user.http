@@ -1,0 +1,60 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNmZTM1NjZkLTM0OGQtNGRhZC04MGU5LWFkNTA0ZjkxOWI0NyIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiQURNSU5JU1RSQVRPUiIsInRva2VuVHlwZSI6ImFjY2VzcyIsImlhdCI6MTc0NjcyMTgzOCwiZXhwIjoxNzQ2NzQzNDM4fQ.R3BEpkPDYHF4iXtH720DgCOJHY4BlqB6bHv0tKRuMik
+
+###
+# GET ALL USER
+GET http://localhost:5000/user
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+# GET CURRENT USER
+GET http://localhost:5000/user/me
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+# GET USER BY ID
+GET http://localhost:5000/user/:id
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+# CREATE USER
+POST http://localhost:5000/user
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Teknik Biomedik",
+    "username": "biomed",
+    "password": "biomed",
+    "email": "biomed@mail.com",
+    "role": "OPERATOR"
+}
+
+###
+# UPDATE PASSWORD CURRENT USER
+PATCH http://localhost:5000/user/me
+Content-Type: application/json 
+Authorization: Bearer {{token}}
+
+{
+    "oldPassword": "tekomm",
+    "newPassword": "tekom"
+}
+
+###
+# UPDATE USER
+PATCH http://localhost:5000/user/:id
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "password": "admin"
+}
+
+###
+# DELETE USER
+DELETE http://localhost:5000/user/:id
+Content-Type: application/json
+Authorization: Bearer {{token}}

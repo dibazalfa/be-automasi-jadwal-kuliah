@@ -1,17 +1,17 @@
-@token = <ubah token>
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJmYzliNmU5LWYzZDUtNDliZC1hZmZlLWY3ZjAyMzE2N2NhMSIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiQURNSU5JU1RSQVRPUiIsInRva2VuVHlwZSI6ImFjY2VzcyIsImlhdCI6MTc0NjcyNTA1OSwiZXhwIjoxNzQ2NzQ2NjU5fQ.V5QteaqkteLTzz1HgQABWsCs_-IKlRyoUhNEOnKppF0
 
 ###
-GET http://localhost:3000/mata_kuliah
+GET http://localhost:5000/mata_kuliah
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ###
-GET http://localhost:3000/mata_kuliah/:kode
+GET http://localhost:5000/mata_kuliah/:kode
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ###
-POST http://localhost:3000/mata_kuliah
+POST http://localhost:5000/mata_kuliah
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -24,7 +24,7 @@ Authorization: Bearer {{token}}
 }
 
 ###
-PATCH http://localhost:3000/mata_kuliah/:kode
+PATCH http://localhost:5000/mata_kuliah/:kode
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -38,6 +38,6 @@ Authorization: Bearer {{token}}
 }
 
 ###
-DELETE http://localhost:3000/mata_kuliah/:kode
+DELETE http://localhost:5000/mata_kuliah/:kode
 Content-Type: application/json
 Authorization: Bearer {{token}}

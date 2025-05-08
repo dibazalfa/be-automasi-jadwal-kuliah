@@ -1,38 +1,40 @@
-// Service layer berujuan untuk handle business logic
-// Kenapa dipisah? Supaya tanggung jawabnya ter-isolate dan functions-nya reusable
+const {
+    findMatkul,
+    findMatkulByKode,
+    insertMatkul,
+    deleteMatkul,
+    editMatkul
+} = require("./matkul.repository");
 
-const { findMatkul, findMatkulByKode, insertMatkul, deleteMatkul, editMatkul } = require("./matkul.repository");
-
-const getAllMatkul = async () => {
-    return await findMatkul();
+const getAllMatkul = async (userId) => {
+    return await findMatkul(userId);
 };
 
-const getMatkulByKode = async (matkul_kode) => {
-    const matkul = await findMatkulByKode(matkul_kode);
+const getMatkulByKode = async (matkul_kode, userId) => {
+    const matkul = await findMatkulByKode(matkul_kode, userId);
     if (!matkul) {
         throw new Error("Data Mata Kuliah tidak ditemukan");
     }
     return matkul;
 };
 
-const createMatkul = async (newMatkulData) => {
-    const existingMatkul = await findMatkulByKode(newMatkulData.matkul_kode);
-
+const createMatkul = async (newMatkulData, userId) => {
+    const existingMatkul = await findMatkulByKode(newMatkulData.matkul_kode, userId);
     if (existingMatkul) {
         throw Error('Data Mata Kuliah sudah ada');
     }
 
-    return await insertMatkul(newMatkulData);
+    return await insertMatkul(newMatkulData, userId);
 };
 
-const deleteMatkulByKode = async (matkul_kode) => {
-    await getMatkulByKode(matkul_kode);
-    return await deleteMatkul(matkul_kode);
+const deleteMatkulByKode = async (matkul_kode, userId) => {
+    await getMatkulByKode(matkul_kode, userId);
+    return await deleteMatkul(matkul_kode, userId);
 };
 
-const editMatkulByKode = async (matkul_kode, matkulData) => {
-    await getMatkulByKode(matkul_kode);
-    return await editMatkul(matkul_kode, matkulData);
+const editMatkulByKode = async (matkul_kode, matkulData, userId) => {
+    await getMatkulByKode(matkul_kode, userId);
+    return await editMatkul(matkul_kode, matkulData, userId);
 };
 
 module.exports = {

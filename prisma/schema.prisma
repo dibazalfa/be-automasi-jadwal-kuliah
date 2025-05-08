@@ -8,17 +8,35 @@ datasource db {
 }
 
 model user {
-    id_user  String @id @default(uuid())
+    id       String @id @default(uuid())
+    email    String @unique
+    name     String @db.VarChar(255)
     username String @db.VarChar(255)
     password String @db.VarChar(255)
+    role     Role   @default(OPERATOR)
+
+    dosens          dosen[]
+    mataKuliah      mata_kuliah[]
+    mataKuliahKelas mata_kuliah_kelas[]
+    jadwalHindari   jadwal_hindari[]
+    ruangans        ruangan[]
+}
+
+enum Role {
+    ADMINISTRATOR
+    OPERATOR
 }
 
 model dosen {
     dosen_kode              String                    @id @db.VarChar(50)
     dosen_nama              String                    @db.VarChar(255)
     dosen_prioritas         Prioritas                 @default(NON_PRIORITAS)
+    userId                  String
+    user                    user                      @relation(fields: [userId], references: [id], onDelete: Cascade)
     jadwal_dosen            jadwal_dosen[]
     mata_kuliah_kelas_dosen mata_kuliah_kelas_dosen[]
+
+    @@unique([dosen_kode, userId])
 }
 
 enum Prioritas {
@@ -51,7 +69,11 @@ enum Sesi {
 model mata_kuliah {
     matkul_kode       String              @id @db.VarChar(50)
     matkul_nama       String              @db.VarChar(255)
+    userId            String
+    user              user                @relation(fields: [userId], references: [id], onDelete: Cascade)
     mata_kuliah_kelas mata_kuliah_kelas[]
+
+    @@unique([matkul_kode, userId])
 }
 
 model mata_kuliah_kelas {
@@ -59,9 +81,13 @@ model mata_kuliah_kelas {
     matkul_kode             String                    @db.VarChar(50)
     kelas_mk                Kelas
     nama_kelas              String                    @db.VarChar(255)
+    userId                  String
+    user                    user                      @relation(fields: [userId], references: [id], onDelete: Cascade)
     mata_kuliah             mata_kuliah               @relation(fields: [matkul_kode], references: [matkul_kode], onDelete: Cascade)
     mata_kuliah_kelas_dosen mata_kuliah_kelas_dosen[]
     jadwal                  jadwal[]
+
+    @@unique([id_mk_kelas, userId])
 }
 
 enum Kelas {
@@ -92,12 +118,20 @@ model jadwal_hindari {
     hindari_hari   Hari
     hindari_sesi   Sesi
     hindari_smt    Int[]
+    userId         String
+    user           user   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([id_hindari, userId])
 }
 
 model ruangan {
     ruangan_kode      String   @id @default(uuid())
     ruangan_kapasitas Int
+    userId            String
+    user              user     @relation(fields: [userId], references: [id], onDelete: Cascade)
     jadwal            jadwal[]
+
+    @@unique([ruangan_kode, userId])
 }
 
 model jadwal {

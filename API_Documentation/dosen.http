@@ -1,40 +1,33 @@
-@token = <ubah token>
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ4ZTM3NGIzLTBhYWEtNDQ1MC05Mjg3LTU3YzU2NDQ5N2NkMSIsInVzZXJuYW1lIjoiYmlvbWVkIiwicm9sZSI6Ik9QRVJBVE9SIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwiaWF0IjoxNzQ2NzE2NTE0LCJleHAiOjE3NDY3MzgxMTR9.m4fzKLF4vyIqts0rBX_pL-kY6QWmtJDbaIcfloS_l3w
 
 ###
-GET http://localhost:3000/dosen
+GET http://localhost:5000/dosen
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ###
-GET http://localhost:3000/dosen/:kode
+GET http://localhost:5000/dosen/:kode
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ###
-POST http://localhost:3000/dosen
+POST http://localhost:5000/dosen
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "dosen_kode": "RW",
-    "dosen_nama": "Dr. Rizka Wakhidatus Sholikah, S. Kom",
+    "dosen_kode": "VR",
+    "dosen_nama": "Elvara Teresia",
     "dosen_prioritas": "PRIORITAS",
     "kesediaan": [
         { "hari": "SENIN", "sesi": "SATU" },
         { "hari": "SENIN", "sesi": "TIGA" },
-        { "hari": "SELASA", "sesi": "SATU" },
-        { "hari": "SELASA", "sesi": "TIGA" },
-        { "hari": "RABU", "sesi": "SATU" },
-        { "hari": "RABU", "sesi": "TIGA" },
-        { "hari": "KAMIS", "sesi": "SATU" },
-        { "hari": "KAMIS", "sesi": "TIGA" },
-        { "hari": "JUMAT", "sesi": "SATU" },
-        { "hari": "JUMAT", "sesi": "TIGA" }
+        { "hari": "SELASA", "sesi": "SATU" }
     ]
 }
 
 ###
-PATCH http://localhost:3000/dosen/:kode
+PATCH http://localhost:5000/dosen/:kode
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -53,6 +46,6 @@ Authorization: Bearer {{token}}
 }
 
 ###
-DELETE http://localhost:3000/dosen/:kode
+DELETE http://localhost:5000/dosen/:kode
 Content-Type: application/json
 Authorization: Bearer {{token}}

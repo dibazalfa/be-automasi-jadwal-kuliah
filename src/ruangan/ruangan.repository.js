@@ -1,40 +1,52 @@
-// Berkomunikasi dengan database
-// Boleh pake ORM, boleh raw query
-// Ganti ORM tinggal ganti ini
-
 const prisma = require('../db');
 
-const findRuangan = async () => {
-    return await prisma.ruangan.findMany();
-};
-
-const findRuanganByKode = async (ruangan_kode) => {
-    return await prisma.ruangan.findUnique({
-        where: { ruangan_kode },
+const findRuangan = async (userId) => {
+    return await prisma.ruangan.findMany({
+        where: { userId }
     });
 };
 
-const insertRuangan = async (ruanganData) => {
+const findRuanganByKode = async (ruangan_kode, userId) => {
+    return await prisma.ruangan.findFirst({
+        where: {
+            ruangan_kode,
+            userId
+        }
+    });
+};
+
+const insertRuangan = async (ruanganData, userId) => {
     return await prisma.ruangan.create({
         data: {
             ruangan_kode: ruanganData.ruangan_kode,
             ruangan_kapasitas: ruanganData.ruangan_kapasitas,
-        },
+            userId
+        }
     });
 };
 
-const deleteRuangan = async (ruangan_kode) => {
+const deleteRuangan = async (ruangan_kode, userId) => {
     return await prisma.ruangan.delete({
-        where: { ruangan_kode },
+        where: {
+            ruangan_kode_userId: {
+                ruangan_kode,
+                userId
+            }
+        }
     });
 };
 
-const editRuangan = async (ruangan_kode, ruanganData) => {
+const editRuangan = async (ruangan_kode, ruanganData, userId) => {
     return await prisma.ruangan.update({
-        where: { ruangan_kode },
-        data: {
-            ruangan_kapasitas: ruanganData.ruangan_kapasitas,
+        where: {
+            ruangan_kode_userId: {
+                ruangan_kode,
+                userId
+            }
         },
+        data: {
+            ruangan_kapasitas: ruanganData.ruangan_kapasitas
+        }
     });
 };
 

@@ -1,32 +1,39 @@
-// Service layer berujuan untuk handle business logic
-// Kenapa dipisah? Supaya tanggung jawabnya ter-isolate dan functions-nya reusable
+const {
+    findRuangan,
+    findRuanganByKode,
+    insertRuangan,
+    deleteRuangan,
+    editRuangan
+} = require("./ruangan.repository");
 
-const { findRuangan, findRuanganByKode, insertRuangan, deleteRuangan, editRuangan } = require("./ruangan.repository");
-
-const getAllRuangan = async () => {
-    return await findRuangan();
+const getAllRuangan = async (userId) => {
+    return await findRuangan(userId);
 };
 
-const getRuanganByKode = async (ruangan_kode) => {
-    const ruangan = await findRuanganByKode(ruangan_kode);
+const getRuanganByKode = async (ruangan_kode, userId) => {
+    const ruangan = await findRuanganByKode(ruangan_kode, userId);
     if (!ruangan) {
         throw new Error("Data Ruangan tidak ditemukan");
     }
     return ruangan;
 };
 
-const createRuangan = async (newRuanganData) => {
-    return await insertRuangan(newRuanganData);
+const createRuangan = async (newRuanganData, userId) => {
+    const existing = await findRuanganByKode(newRuanganData.ruangan_kode, userId);
+    if (existing) {
+        throw new Error("Kode ruangan sudah digunakan");
+    }
+    return await insertRuangan(newRuanganData, userId);
 };
 
-const deleteRuanganByKode = async (ruangan_kode) => {
-    await getRuanganByKode(ruangan_kode);
-    return await deleteRuangan(ruangan_kode);
+const deleteRuanganByKode = async (ruangan_kode, userId) => {
+    await getRuanganByKode(ruangan_kode, userId);
+    return await deleteRuangan(ruangan_kode, userId);
 };
 
-const editRuanganByKode = async (ruangan_kode, ruanganData) => {
-    await getRuanganByKode(ruangan_kode);
-    return await editRuangan(ruangan_kode, ruanganData);
+const editRuanganByKode = async (ruangan_kode, ruanganData, userId) => {
+    await getRuanganByKode(ruangan_kode, userId);
+    return await editRuangan(ruangan_kode, ruanganData, userId);
 };
 
 module.exports = {

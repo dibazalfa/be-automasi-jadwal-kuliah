@@ -1,36 +1,39 @@
-// Service layer berujuan untuk handle business logic
-// Kenapa dipisah? Supaya tanggung jawabnya ter-isolate dan functions-nya reusable
+const {
+    findDosen,
+    findDosenByKode,
+    insertDosen,
+    deleteDosen,
+    editDosen
+} = require("./dosen.repository");
 
-const { findDosen, findDosenByKode, insertDosen, deleteDosen, editDosen } = require("./dosen.repository");
-
-const getAllDosen = async () => {
-    return await findDosen();
+const getAllDosen = async (userId) => {
+    return await findDosen(userId);
 };
 
-const getDosenByKode = async (dosen_kode) => {
-    const dosen = await findDosenByKode(dosen_kode);
+const getDosenByKode = async (dosen_kode, userId) => {
+    const dosen = await findDosenByKode(dosen_kode, userId);
     if (!dosen) {
         throw new Error("Data dosen tidak ditemukan");
     }
     return dosen;
 };
 
-const createDosen = async (newDosenData) => {
-    const existingDosen = await findDosenByKode(newDosenData.dosen_kode);
+const createDosen = async (newDosenData, userId) => {
+    const existingDosen = await findDosenByKode(newDosenData.dosen_kode, userId);
     if (existingDosen) {
         throw Error('Data dosen sudah ada');
     }
-    return await insertDosen(newDosenData);
+    return await insertDosen(newDosenData, userId);
 };
 
-const deleteDosenByKode = async (dosen_kode) => {
-    await getDosenByKode(dosen_kode);
-    return await deleteDosen(dosen_kode);
+const deleteDosenByKode = async (dosen_kode, userId) => {
+    await getDosenByKode(dosen_kode, userId);
+    return await deleteDosen(dosen_kode, userId);
 };
 
-const editDosenByKode = async (dosen_kode, dosenData) => {
-    await getDosenByKode(dosen_kode);
-    return await editDosen(dosen_kode, dosenData);
+const editDosenByKode = async (dosen_kode, dosenData, userId) => {
+    await getDosenByKode(dosen_kode, userId);
+    return await editDosen(dosen_kode, dosenData, userId);
 };
 
 module.exports = {
