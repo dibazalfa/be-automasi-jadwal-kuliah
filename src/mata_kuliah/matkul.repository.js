@@ -63,7 +63,8 @@ const editMatkul = async (matkul_kode, matkulData, userId) => {
             mata_kuliah_kelas: {
                 create: matkulData.kelas.map(item => ({
                     kelas_mk: item.kelas_mk,
-                    nama_kelas: `${matkulData.matkul_nama} ${item.kelas_mk}`
+                    nama_kelas: `${matkulData.matkul_nama} ${item.kelas_mk}`,
+                    userId: userId
                 }))
             }
         },
