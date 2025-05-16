@@ -23,8 +23,7 @@ const insertMatkul = async (matkulData, userId) => {
             mata_kuliah_kelas: {
                 create: matkulData.kelas.map(item => ({
                     kelas_mk: item.kelas_mk,
-                    nama_kelas: `${matkulData.matkul_nama} ${item.kelas_mk}`,
-                    userId: userId
+                    nama_kelas: `${matkulData.matkul_nama} ${item.kelas_mk}`
                 }))
             }
         },
@@ -33,8 +32,6 @@ const insertMatkul = async (matkulData, userId) => {
         }
     });
 };
-
-
 
 const deleteMatkul = async (matkul_kode, userId) => {
     return await prisma.mata_kuliah.delete({
@@ -48,8 +45,7 @@ const deleteMatkul = async (matkul_kode, userId) => {
 };
 
 const editMatkul = async (matkul_kode, matkulData, userId) => {
-    // Hapus kelas lama
-    await prisma.mata_kuliah_kelas.deleteMany({ where: { matkul_kode } });
+    await prisma.mata_kuliah_kelas.deleteMany({ where: { matkul_kode, userId } });
 
     return await prisma.mata_kuliah.update({
         where: {
@@ -63,8 +59,7 @@ const editMatkul = async (matkul_kode, matkulData, userId) => {
             mata_kuliah_kelas: {
                 create: matkulData.kelas.map(item => ({
                     kelas_mk: item.kelas_mk,
-                    nama_kelas: `${matkulData.matkul_nama} ${item.kelas_mk}`,
-                    userId: userId
+                    nama_kelas: `${matkulData.matkul_nama} ${item.kelas_mk}`
                 }))
             }
         },

@@ -1,29 +1,29 @@
-@token = <ubah token>
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImExNzA2YjIyLTM2NTItNDgzMS04NGI5LTkxNDUwYmRlMTRjYSIsInVzZXJuYW1lIjoiYmlvbWVkIiwicm9sZSI6Ik9QRVJBVE9SIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwiaWF0IjoxNzQ3NDAyMDM3LCJleHAiOjE3NDc0MjM2Mzd9.bd4j1gCxcDJciqjIKO1L3vWGRDxbkcLWfXDej8BTo9s
 
 ###
-GET http://localhost:3000/mk_dosen
+GET http://localhost:5000/mk_dosen
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ###
-GET http://localhost:3000/mk_dosen/:id
+GET http://localhost:5000/mk_dosen/:id
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ###
-POST http://localhost:3000/mk_dosen
+POST http://localhost:5000/mk_dosen
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "nama_kelas" : "Big Data dan Data Lakehouse B",
-    "dosen_kode" : "FD",
+    "nama_kelas" : "Sistem Cerdas A",
+    "dosen_kode" : "VR",
     "matkul_tipe" : "DEPARTEMEN",
     "mk_kelas_sem" : [4]
 }
 
 ###
-PUT http://localhost:3000/mk_dosen/:id
+PUT http://localhost:5000/mk_dosen/:id
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -35,6 +35,6 @@ Authorization: Bearer {{token}}
 }
 
 ###
-DELETE http://localhost:3000/mk_dosen/:id
+DELETE http://localhost:5000/mk_dosen/:id
 Content-Type: application/json
 Authorization: Bearer {{token}}

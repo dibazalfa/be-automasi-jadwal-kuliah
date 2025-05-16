@@ -52,6 +52,7 @@ const insertMkDosen = async (mkDosenData, userId) => {
         data: {
             id_mk_kelas: mkKelas.id_mk_kelas,
             dosen_kode: mkDosenData.dosen_kode,
+            userId: userId,
             mk_kelas_sem: mkDosenData.mk_kelas_sem,
             matkul_tipe: mkDosenData.matkul_tipe
         },
@@ -60,6 +61,8 @@ const insertMkDosen = async (mkDosenData, userId) => {
             dosen: true
         }
     });
+
+
 };
 
 const deleteMkDosen = async (id_mk_kelas_dosen) => {
