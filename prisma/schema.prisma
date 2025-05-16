@@ -8,12 +8,14 @@ datasource db {
 }
 
 model user {
-    id       String @id @default(uuid())
-    email    String @unique
-    name     String @db.VarChar(255)
-    username String @db.VarChar(255)
-    password String @db.VarChar(255)
-    role     Role   @default(OPERATOR)
+    id        String    @id @default(uuid())
+    email     String    @unique
+    name      String    @db.VarChar(255)
+    username  String    @db.VarChar(255)
+    password  String    @db.VarChar(255)
+    role      Role      @default(OPERATOR)
+    createdAt DateTime  @default(now())
+    updatedAt DateTime? @updatedAt
 
     dosens          dosen[]
     mataKuliah      mata_kuliah[]
@@ -32,6 +34,8 @@ model dosen {
     userId          String
     dosen_nama      String    @db.VarChar(255)
     dosen_prioritas Prioritas @default(NON_PRIORITAS)
+    createdAt       DateTime  @default(now())
+    updatedAt       DateTime? @updatedAt
 
     user                    user                      @relation(fields: [userId], references: [id], onDelete: Cascade)
     jadwal_dosen            jadwal_dosen[]
@@ -46,12 +50,15 @@ enum Prioritas {
 }
 
 model jadwal_dosen {
-    id_jadwal_dosen  String @id @default(uuid())
-    dosen_kode       String @db.VarChar(50)
+    id_jadwal_dosen  String    @id @default(uuid())
+    dosen_kode       String    @db.VarChar(50)
     userId           String
     dosen_sedia_hari Hari
     dosen_sedia_sesi Sesi
-    dosen            dosen  @relation(fields: [dosen_kode, userId], references: [dosen_kode, userId], onDelete: Cascade)
+    createdAt        DateTime  @default(now())
+    updatedAt        DateTime? @updatedAt
+
+    dosen dosen @relation(fields: [dosen_kode, userId], references: [dosen_kode, userId], onDelete: Cascade)
 }
 
 enum Hari {
@@ -69,9 +76,12 @@ enum Sesi {
 }
 
 model mata_kuliah {
-    matkul_kode       String              @db.VarChar(50)
-    matkul_nama       String              @db.VarChar(255)
-    userId            String
+    matkul_kode String    @db.VarChar(50)
+    matkul_nama String    @db.VarChar(255)
+    userId      String
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime? @updatedAt
+
     user              user                @relation(fields: [userId], references: [id], onDelete: Cascade)
     mata_kuliah_kelas mata_kuliah_kelas[]
 
@@ -79,11 +89,13 @@ model mata_kuliah {
 }
 
 model mata_kuliah_kelas {
-    id_mk_kelas String @id @default(uuid())
-    matkul_kode String @db.VarChar(50)
+    id_mk_kelas String    @id @default(uuid())
+    matkul_kode String    @db.VarChar(50)
     userId      String
     kelas_mk    Kelas
-    nama_kelas  String @db.VarChar(255)
+    nama_kelas  String    @db.VarChar(255)
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime? @updatedAt
 
     mata_kuliah mata_kuliah @relation(fields: [matkul_kode, userId], references: [matkul_kode, userId], onDelete: Cascade)
 
@@ -100,12 +112,15 @@ enum Kelas {
 }
 
 model mata_kuliah_kelas_dosen {
-    id_mk_kelas_dosen String            @id @default(uuid())
+    id_mk_kelas_dosen String    @id @default(uuid())
     id_mk_kelas       String
-    dosen_kode        String            @db.VarChar(50)
+    dosen_kode        String    @db.VarChar(50)
     mk_kelas_sem      Int[]
     userId            String
-    matkul_tipe       TipeMK            @default(DEPARTEMEN)
+    matkul_tipe       TipeMK    @default(DEPARTEMEN)
+    createdAt         DateTime  @default(now())
+    updatedAt         DateTime? @updatedAt
+
     mata_kuliah_kelas mata_kuliah_kelas @relation(fields: [id_mk_kelas], references: [id_mk_kelas], onDelete: Cascade)
     dosen             dosen             @relation(fields: [dosen_kode, userId], references: [dosen_kode, userId], onDelete: Cascade)
 }
@@ -116,35 +131,43 @@ enum TipeMK {
 }
 
 model jadwal_hindari {
-    id_hindari     String @id @default(uuid())
-    hindari_agenda String @db.VarChar(255)
+    id_hindari     String    @id @default(uuid())
+    hindari_agenda String    @db.VarChar(255)
     hindari_hari   Hari
     hindari_sesi   Sesi
     hindari_smt    Int[]
-    userId         String
-    user           user   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    createdAt      DateTime  @default(now())
+    updatedAt      DateTime? @updatedAt
+
+    userId String
+    user   user   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([id_hindari, userId])
 }
 
 model ruangan {
-    ruangan_kode      String   @default(uuid())
+    ruangan_kode      String    @default(uuid())
     ruangan_kapasitas Int
-    userId            String
-    user              user     @relation(fields: [userId], references: [id], onDelete: Cascade)
-    jadwal            jadwal[]
+    createdAt         DateTime  @default(now())
+    updatedAt         DateTime? @updatedAt
+
+    userId String
+    user   user     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    jadwal jadwal[]
 
     @@id([ruangan_kode, userId])
 }
 
 model jadwal {
-    id_jadwal    String @id @default(uuid())
+    id_jadwal    String    @id @default(uuid())
     id_mk_kelas  String
     userId       String
     ruangan_kode String
     jadwal_hari  Hari
     jadwal_sesi  Sesi
     jadwal_smt   Int[]
+    createdAt    DateTime  @default(now())
+    updatedAt    DateTime? @updatedAt
 
     mata_kuliah_kelas mata_kuliah_kelas @relation(fields: [id_mk_kelas], references: [id_mk_kelas], onDelete: Cascade)
     ruangan           ruangan           @relation(fields: [ruangan_kode, userId], references: [ruangan_kode, userId], onDelete: Cascade)
